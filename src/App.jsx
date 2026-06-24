@@ -27,6 +27,9 @@ return (
             placeholder="Search for a movie"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+                if (e.key === "Enter") searchMovies()
+}}
         />
         <button onClick={searchMovies} disabled={loading}>
             {loading ? "Searching..." : "Search"}
@@ -34,7 +37,7 @@ return (
         {error && <p style={{color: "red"}}>{error}</p>}
         {movies.map((movie) => (
             <div key={movie.imdbID}>
-              <img src={movie.Poster} alt={movie.Title} width="100" />
+              {movie.Poster !== "N/A" && <img src={movie.Poster} alt={movie.Title} width="100" />}
                 <h2>{movie.Title}</h2>
                 <p>{movie.Year}</p>
             </div>
